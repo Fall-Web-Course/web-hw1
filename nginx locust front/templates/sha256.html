@@ -1,0 +1,10 @@
+<h2>Input your text, take the hash :))</h2>
+
+<form method="POST">
+    <input placeholder="Write your text here" type="text" id="text" name="text">
+    <button type="submit">submit</button>
+</form>
+
+<br>
+<h2>input: {{ .input }}</h2>
+<h2>sha256: {{ .sha_value }}</h2>
