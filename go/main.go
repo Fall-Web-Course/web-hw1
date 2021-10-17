@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-func getSHA256(input string){
+func getSHA256(input string) string {
 	hash := sha256.Sum256([]byte(input))
 	out := fmt.Sprintf("%x", hash)
 	return out
@@ -30,7 +30,7 @@ func sha256_post(c *gin.Context){
 
 func sha_post(c *gin.Context){
 	hash := getSHA256(c.PostForm("string"))
-	c.JSON(http.StatusOK, gin.H{"sha256": out})
+	c.JSON(http.StatusOK, gin.H{"sha256": hash})
 	// TOdO: store in databaes
 }
 
