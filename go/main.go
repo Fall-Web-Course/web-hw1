@@ -29,7 +29,10 @@ func sha256_post(c *gin.Context){
 }
 
 func sha_post(c *gin.Context){
-	hash := getSHA256(c.PostForm("string"))
+	input, exists := c.GetPostForm("string")
+	if ! exists { c.JSON(http.StatusBadRequest, gin.H{"error": "\"string\" value not found"}); return }
+	if len(input) < 8 { c.JSON(http.StatusBadRequest, gin.H{"error": "Your input must be more than 8 chars"}); return }
+	hash := getSHA256(input)
 	c.JSON(http.StatusOK, gin.H{"sha256": hash})
 	// TOdO: store in databaes
 }
