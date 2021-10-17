@@ -28,7 +28,7 @@ func sha256_post(c *gin.Context){
 	// TOdO: store in databaes
 }
 
-func sha256_post(c *gin.Context){
+func sha_post(c *gin.Context){
 	hash := getSHA256(c.PostForm("string"))
 	c.JSON(http.StatusOK, gin.H{"sha256": out})
 	// TOdO: store in databaes
@@ -45,7 +45,7 @@ func main() {
 	})
 	r.GET("/", sha256_get)
 	r.POST("/sha256", sha256_post)
-	r.POST("/sha", sha_api_post)
+	r.POST("/sha", sha_post)
 	// TODO: add get endpoints
 
 	r.Run() // Listens on 0.0.0.0:8080
