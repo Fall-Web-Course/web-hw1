@@ -14,9 +14,14 @@ func sha256_get(c *gin.Context){
 
 func sha256_post(c *gin.Context){
 	input := c.PostForm("text")
+	if len(input) < 8 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Your input must be more than 8 chars"})
+		return
+	}
 	hash := sha256.Sum256([]byte(input))
 	out := fmt.Sprintf("%x", hash)
-	c.HTML(200, "sha256.html", gin.H{"input": input, "sha_value": out})
+	c.HTML(http.StatusOK, "sha256.html", gin.H{"input": input, "sha_value": out})
+	// c.JSON(http.StatusOK, gin.H{"sha256": out})
 }
 
 func main() {
@@ -28,7 +33,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.GET("/sha256", sha256_get)
+	r.GET("/", sha256_get)
 	r.POST("/sha256", sha256_post)
 
 	r.Run() // Listens on 0.0.0.0:8080
