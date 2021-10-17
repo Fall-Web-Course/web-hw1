@@ -2,18 +2,14 @@
 
 <form method="POST" action="/go/sha256" onsubmit="return validate();">
 
-<script>function validate() {
-	 // check if input is bigger than 3
-	 var value = document.getElementById('text').value;
-	 if (value.length < 8) {
-		 alert("Your input must be more than 8 chars")
-		    return false; // keep form from submitting
-		 }
-	 // else form is good let it submit, of course you will 
-	 // probably want to alert the user WHAT went wrong.
-
-		 return true;
-}</script>
+	<script>function validate() {
+		var value = document.getElementById('text').value;
+		if (value.length < 8) {
+			alert("Your input must be more than 8 chars")
+			return false; // keep form from submitting
+		}
+		return true;
+	}</script>
 
 
     <input placeholder="Write your text here" type="text" id="text" name="text">
