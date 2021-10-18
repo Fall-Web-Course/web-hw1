@@ -24,7 +24,24 @@ func getSHA256(input string) string {
 }
 
 func sha256_get(c *gin.Context){
-	c.HTML(http.StatusOK, "sha256.html", gin.H{})
+	q := c.Request.URL.Query().Get("hash_text");
+	if len(q) <= 0 { c.HTML(http.StatusOK, "sha256.html", gin.H{}); return }
+
+	value, err := rdb.Get(ctx, q).Result()
+	if err == redis.Nil {
+		html := "<p>Hash value not found, <a href=/go/sha256>back</a></p>"
+		c.Writer.WriteHeader(http.StatusOK)
+		c.Writer.Write([]byte(html))
+		return
+	} else if err != nil {
+		html := "<p>Something bad happend, <a href=/go/sha256>back</a></p>"
+		c.Writer.WriteHeader(http.StatusOK)
+		c.Writer.Write([]byte(html))
+		panic(err)
+		return
+	}
+	c.HTML(http.StatusOK, "sha256.html", gin.H{"hash_input": q, "unhashed_value": value})
+
 }
 
 func sha256_post(c *gin.Context){
