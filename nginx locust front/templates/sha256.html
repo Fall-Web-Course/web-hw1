@@ -19,3 +19,14 @@
 <br>
 <h2>input: {{ .input }}</h2>
 <h2>sha256: {{ .sha_value }}</h2>
+<br>
+<br>
+
+<form method="GET" action="/go/sha256">
+    <input placeholder="Write your hash here" type="hash_text" id="hash_text" name="hash_text">
+    <button type="submit">submit</button>
+</form>
+
+<br>
+<h2>input: {{ .hash_input }}</h2>
+<h2>sha256: {{ .unhashed_value }}</h2>
