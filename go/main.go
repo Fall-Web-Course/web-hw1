@@ -9,8 +9,13 @@ import (
 	"fmt"
 )
 
-var ctx := context.Background()
+var ctx = context.Background()
 
+var rdb = redis.NewClient(&redis.Options{
+	Addr:	  "localhost:6379",
+	Password: "", // no password set
+	DB:		  0,  // use default DB
+})
 
 func getSHA256(input string) string {
 	hash := sha256.Sum256([]byte(input))
@@ -31,9 +36,9 @@ func sha256_post(c *gin.Context){
 	hash := getSHA256(input)
 
 	err := rdb.Set(ctx, hash, input, 0).Err()
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 
 	c.HTML(http.StatusOK, "sha256.html", gin.H{"input": input, "sha_value": hash})
 	// TOdO: store in databaes
@@ -49,11 +54,6 @@ func sha_post(c *gin.Context){
 }
 
 func main() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr:	  "localhost:6379",
-		Password: "", // no password set
-		DB:		  0,  // use default DB
-	})
 
 	r := gin.Default()
 	r.LoadHTMLGlob("../nginx locust front/templates/*")
