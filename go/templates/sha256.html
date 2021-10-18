@@ -2,53 +2,52 @@
 
 <html>
 
-	<head>
-	</head>
+<head>
+</head>
 
-	<body>
-
-<style>
-	body {
-  		background-image: url('https://iconape.com/wp-content/files/eh/64415/svg/golang-gopher.svg');
-  		background-repeat: no-repeat;
- 		background-size: 160% 100%;
-	}
-</style>
-
-<h1>GO</h1>
-
-<h2>Input your text, take the hash :))</h2>
-<form method="POST" action="/go/sha256" onsubmit="return validate();">
-
-	<script>function validate() {
-		var value = document.getElementById('text').value;
-		if (value.length < 8) {
-			alert("Your input must be more than 8 chars")
-			return false; // keep form from submitting
+<body>
+	<style>
+		body {
+			background-image: url('https://iconape.com/wp-content/files/eh/64415/svg/golang-gopher.svg');
+			background-repeat: no-repeat;
+			background-size: 160% 100%;
 		}
-		return true;
-	}</script>
+	</style>
+
+	<h1>GO</h1>
+
+	<h2>Input your text, take the hash :))</h2>
+	<form method="POST" action="/go/sha256" onsubmit="return validate();">
+
+		<script>function validate() {
+			var value = document.getElementById('text').value;
+			if (value.length < 8) {
+				alert("Your input must be more than 8 chars")
+				return false; // keep form from submitting
+			}
+			return true;
+		}</script>
 
 
-    <input placeholder="Write your text here" type="text" id="text" name="text">
-    <button type="submit">submit</button>
-</form>
+		<input placeholder="Write your text here" type="text" id="text" name="text">
+		<button type="submit">submit</button>
+	</form>
 
-<br>
-<h2>input: {{ .input }}</h2>
-<h2>sha256: {{ .sha_value }}</h2>
-<br>
-<br>
-<br>
+	<br>
+	<h2>input: {{ .input }}</h2>
+	<h2>sha256: {{ .sha_value }}</h2>
+	<br>
+	<br>
+	<br>
 
-<h2>Input your hash, take the value :))</h2>
-<form method="GET" action="/go/sha256">
-    <input placeholder="Write your hash here" type="hash_text" id="hash_text" name="hash_text">
-    <button type="submit">submit</button>
-</form>
+	<h2>Input your hash, take the value :))</h2>
+	<form method="GET" action="/go/sha256">
+		<input placeholder="Write your hash here" type="hash_text" id="hash_text" name="hash_text">
+		<button type="submit">submit</button>
+	</form>
 
-<br>
-<h2>input: {{ .hash_input }}</h2>
-<h2>sha256: {{ .unhashed_value }}</h2>
+	<br>
+	<h2>input: {{ .hash_input }}</h2>
+	<h2>sha256: {{ .unhashed_value }}</h2>
 </body>
 </html>
