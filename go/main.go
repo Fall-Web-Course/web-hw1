@@ -70,6 +70,21 @@ func sha_post(c *gin.Context){
 	// TOdO: store in databaes
 }
 
+func sha_get(c *gin.Context){
+	q := c.Request.URL.Query().Get("hash_text");
+
+	value, err := rdb.Get(ctx, q).Result();
+        if err == redis.Nil {
+		c.JSON(http.StatusOK, gin.H{"error": "Hash value not found"})
+		return
+        } else if err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": "Somthing bad happend"})
+		panic(err)
+                return
+        }
+	c.JSON(http.StatusOK, gin.H{"value": value})
+}
+
 func main() {
 
 	r := gin.Default()
@@ -83,6 +98,7 @@ func main() {
 	r.GET("/sha256", sha256_get)
 	r.POST("/sha256", sha256_post)
 	r.POST("/sha", sha_post)
+	r.GET("/sha", sha_get)
 	// TODO: add get endpoints
 
 	r.Run() // Listens on 0.0.0.0:8080
