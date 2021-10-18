@@ -46,7 +46,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.GET("/", sha256_get)
+	r.GET("/sha256", sha256_get)
 	r.POST("/sha256", sha256_post)
 	r.POST("/sha", sha_post)
 	// TODO: add get endpoints
