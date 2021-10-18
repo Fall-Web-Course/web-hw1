@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"context"
 	"fmt"
+	"os"
 )
 
 var ctx = context.Background()
@@ -86,9 +87,12 @@ func sha_get(c *gin.Context){
 }
 
 func main() {
+	PORT := os.Getenv("PORT")
+	HOST_LAN_IP := os.Getenv("LAN_HOST_IP")
+	LISTEN_ADDRESS := fmt.Sprintf("%s:%s", HOST_LAN_IP, PORT)
 
 	r := gin.Default()
-	r.LoadHTMLGlob("../nginx locust front/templates/*")
+	r.LoadHTMLGlob("./templates/*")
 
 	r.GET("/ping", func(c *gin.Context) { // For the sake of testing
 		c.JSON(200, gin.H{
@@ -101,5 +105,5 @@ func main() {
 	r.GET("/sha", sha_get)
 	// TODO: add get endpoints
 
-	r.Run() // Listens on 0.0.0.0:8080
+	r.Run(LISTEN_ADDRESS) // Listens on 0.0.0.0:8080
 }
