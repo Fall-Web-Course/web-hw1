@@ -22,6 +22,6 @@ RUN apk add --no-cache ca-certificates
 
 COPY --from=build /go/src/hw1 .
 
-EXPOSE 8080
+EXPOSE $PORT
 
 CMD ./webhw1
