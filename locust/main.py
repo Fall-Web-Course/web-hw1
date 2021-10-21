@@ -10,7 +10,7 @@ class GoUser(HttpUser):
  
     @task
     def go_sha_api(self):
-        with self.client.post("/sha", json={"String": "first_test_string"}, catch_response=True) as response:
+        with self.client.post("/sha", json={"String": "first_test_string"}, catch_response=True) as res:
             try:
                 hash_value = res.json()["sha256"]
                 self.client.get(f"/sha?hash_text{hash_value}")
