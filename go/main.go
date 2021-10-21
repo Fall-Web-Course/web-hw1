@@ -18,6 +18,11 @@ var rdb = redis.NewClient(&redis.Options{
 	DB:		  0,  // use default DB
 })
 
+type Input struct {
+	Text string `json:"String"`
+}
+
+
 func getSHA256(input string) string {
 	hash := sha256.Sum256([]byte(input))
 	out := fmt.Sprintf("%x", hash)
@@ -59,16 +64,21 @@ func sha256_post(c *gin.Context){
 	}
 
 	c.HTML(http.StatusOK, "sha256.html", gin.H{"input": input, "sha_value": hash})
-	// TOdO: store in databaes
 }
 
 func sha_post(c *gin.Context){
-	input, exists := c.GetPostForm("string")
-	if ! exists { c.JSON(http.StatusBadRequest, gin.H{"error": "\"string\" value not found"}); return }
-	if len(input) < 8 { c.JSON(http.StatusBadRequest, gin.H{"error": "Your input must be more than 8 chars"}); return }
-	hash := getSHA256(input)
+	var input Input
+	c.BindJSON(&input)
+	if len(input.Text) < 8 { c.JSON(http.StatusBadRequest, gin.H{"error": "Your input must be more than 8 chars"}); return }
+	hash := getSHA256(input.Text)
+
+	err := rdb.Set(ctx, hash, input.Text, 0).Err()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Saving in Redis failed"})
+		panic(err)
+	}
+
 	c.JSON(http.StatusOK, gin.H{"sha256": hash})
-	// TOdO: store in databaes
 }
 
 func sha_get(c *gin.Context){
