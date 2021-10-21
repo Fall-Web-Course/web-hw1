@@ -113,7 +113,6 @@ func main() {
 	r.POST("/sha256", sha256_post)
 	r.POST("/sha", sha_post)
 	r.GET("/sha", sha_get)
-	// TODO: add get endpoints
 
 	r.Run(LISTEN_ADDRESS) // Listens on 0.0.0.0:8080
 }
