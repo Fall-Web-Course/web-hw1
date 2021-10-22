@@ -3,6 +3,7 @@ extends layout
 block content
   h1= "NODE"
   h2 Input your text, take the hash :))
+    img(src='images/node.png', alt='Node Logo')
   form(action="/sha256", method="POST")
     input(name="phrase", type="string", placeholder="Type your more-than-7-character phrase here...")
     button(type="submit") Submit
@@ -21,4 +22,5 @@ block content
       content  #{phrase}  
     h2 sha256:
       content  #{hash_value}
+
 
