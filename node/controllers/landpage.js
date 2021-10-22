@@ -21,11 +21,32 @@ function cyrb53(keyString)
   return (((hash + (hash << 15)) & 4294967295) >>> 0).toString(16)
 };
 
+function getRedis(key) {
+  
+ }
+
+ var phrase = ""
+
 exports.get_form = function(req, res, next) {
   // res.render('index', { hash_value: req.query.hash_value });
-  res.render('index', { phrase: client.get(req.query.hash_value, redis.print), 
-                        hash_value: req.query.hash_value, 
-                        title: 'Node App'});
+  if (req.query == null) {
+    res.render('index', { phrase: phrase, 
+      hash_value: req.query.hash_value, 
+      title: 'Node App'});
+  }
+  else {
+    client.get(req.query.hash_value, (err, val) => {
+      if (err) {
+        res.render('index', { phrase: phrase, 
+          hash_value: req.query.hash_value, 
+          title: 'Node App'});
+      }
+      res.render('index', { phrase: val, 
+                            hash_value: req.query.hash_value, 
+                            title: 'Node App'});
+     })
+
+  }
 }
 
 exports.submit_form = function(req, res, next) {
