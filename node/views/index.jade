@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= "NODE"
+  h2 Input your text, take the hash :))
+  form(action="/sha256", method="GET")
+    input(name="phrase", type="string", placeholder="Type your more-than-7-character phrase here...")
+    button(type="submit") Submit
+
+  h2 input:
+  h2 sha256:
+
+  
+  h2 Input your hash, take the value :))
+  form(action="/sha256", method="POST")
+    input(name="hash_value", type="string", placeholder="Type your hash here...")
+    button(type="submit") Submit
+
+  h2 input:
+  h2 sha256:
+
