@@ -40,6 +40,10 @@ exports.get_form = function(req, res, next) {
 }
 
 exports.submit_form = function(req, res, next) {
+  if (req.body.phrase.length < 8) {
+    res.render('not_found', { error_message: "phrase should have more than 7 characters...",
+    title: 'Node App'});
+  }
   hash_value = crypto.createHash("sha256")
   .update(req.body.phrase)
   .digest("hex")
