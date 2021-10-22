@@ -38,4 +38,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+port = process.env.PORT || 3001
+app.set("port", port)
+
 module.exports = app;
+
+

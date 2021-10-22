@@ -12,7 +12,8 @@ client.on("error", function(error) {
 
 exports.get_form = function(req, res, next) {
   // res.render('index', { hash_value: req.query.hash_value });
-  if (req.query == null) {
+  console.log(req.query)
+  if (req.query.hash_value === undefined) {
     res.render('index', { phrase_1: "", 
                           hash_value_1: "",
                           phrase_2: "",
