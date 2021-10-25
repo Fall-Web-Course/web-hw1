@@ -16,3 +16,6 @@
 ### 5 Node & 5 Go
 *   node: 7% ~ 8.5% cpu, 55 MiB Memory (on average)
 *   go: 2.3% ~ 3.1% cpu, 6.1 MiB Memory (on average)
+
+## Locust Chart for 3 Node & 3 Go
+![not found](locust_3go_3node.png?raw=true)
