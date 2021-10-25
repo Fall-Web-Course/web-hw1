@@ -58,22 +58,25 @@ exports.submit_form = function(req, res, next) {
 
 exports.get_by_hash = function(req, res, next) {
   if (req.query.hash_value === undefined) {
-    res.json({ error_message: "You should give hash_value as parameter",
-               status_code: 404});
+    res.status(400)
+    res.json({ error_message: "You should give hash_value as parameter"});
   }
   else {
     client.get(req.query.hash_value, (err, val) => {
       if (err) {
-        res.json({ error_message: "Something bad happened!",
-                   status_code: 404});
+        res.status(400)
+        res.json({ error_message: "Something bad happened!"});
       }
       if (val == null) {
-        res.json({ error_message: "Hash not found!",
-                   status_code: 404});
+        res.status(400)
+        res.json({ error_message: "Hash not found!"});
       }
-      res.json({
+      else {
+        res.status(200)
+        res.json({
         value: val,
       });
+      }
      })
   }
 }
@@ -81,15 +84,16 @@ exports.get_by_hash = function(req, res, next) {
 exports.set_by_phrase = function(req, res, next) {
   console.log(req.body.string)
   if (req.body.string.length < 8) {
+    res.status(400)
     res.json({
-      error_message: "phrase should have more than 7 characters...",
-      status_code: 404
+      error_message: "phrase should have more than 7 characters..."
     });
   }
   hash_value = crypto.createHash("sha256")
   .update(req.body.string)
   .digest("hex")
   client.set(hash_value, req.body.string, redis.print);
+  res.status(200)
   res.json({
     sha256: hash_value
   });
