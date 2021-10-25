@@ -82,7 +82,7 @@ func sha_post(c *gin.Context){
 }
 
 func sha_get(c *gin.Context){
-	q := c.Request.URL.Query().Get("hash_text");
+	q := c.Request.URL.Query().Get("hash_value");
 
 	value, err := rdb.Get(ctx, q).Result();
         if err == redis.Nil {
