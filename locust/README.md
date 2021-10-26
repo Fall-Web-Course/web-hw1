@@ -3,7 +3,8 @@
 2- Run locust web client with `locust -f main.py -H https://hw1.asdfghj.ir`  
 
 ## Notes
-* locust is already deployed on locust.hw1.asdfghj.ir
+
+* locust is already deployed on [locust.hw1.asdfghj.ir](http://locust.hw1.asdfghj.ir)
 * you can't access w/o password :))
 
 ## Tests Results (350 RPS)
@@ -18,4 +19,4 @@
 *   go: 2.3% ~ 3.1% cpu, 6.1 MiB Memory (on average)
 
 ## Locust Chart for 3 Node & 3 Go
-![not found](locust_3go_3node.png?raw=true)
+![image](locust_3go_3node.png?raw=true)
