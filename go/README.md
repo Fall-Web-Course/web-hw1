@@ -1,6 +1,7 @@
 ## How to run
 ### Docker
-Just use run.sh at go directory  
+First of all, build and create docker image using `docker build -t web-hw1-go:production .`  
+Then just use run.sh at go directory  
 You can pass number of instances you want to the script  
 Example:  
 * `bash run.sh 3`
