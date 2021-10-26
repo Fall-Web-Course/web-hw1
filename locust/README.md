@@ -3,5 +3,5 @@
 2- Run locust web client with `locust -f main.py -H https://hw1.asdfghj.ir`  
 
 ## Notes
-* locust is already deployed on locust.hw1.asdfghj.ir
-* you can't access w/o password :))
+* Locust is already deployed on [locust.hw1.asdfghj.ir](https://locust.hw1.asdfghj.ir)
+* You can't access w/o password :))
