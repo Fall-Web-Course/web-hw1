@@ -7,3 +7,4 @@ Each part has own readme file:
 * [Nginx](https://github.com/Fall-Web-Course/web-hw1/blob/master/nginx/README.md)
 
 from gitlab
+2
